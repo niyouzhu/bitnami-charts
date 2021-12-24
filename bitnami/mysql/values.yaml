@@ -395,10 +395,15 @@ primary:
     selector: {}
   ## @param primary.extraVolumes [array] Optionally specify extra list of additional volumes to the MySQL Primary pod(s)
   ##
-  extraVolumes: []
+  extraVolumes: 
+    - name: timezone
+      hostPath:
+        path: /usr/share/zoneinfo/Asia/Shanghai
   ## @param primary.extraVolumeMounts [array] Optionally specify extra list of additional volumeMounts for the MySQL Primary container(s)
   ##
-  extraVolumeMounts: []
+  extraVolumeMounts: 
+    - name: timezone
+      mountPath: /etc/localtime
   ## @param primary.initContainers [array] Add additional init containers for the MySQL Primary pod(s)
   ##
   initContainers: []
@@ -706,10 +711,16 @@ secondary:
     selector: {}
   ## @param secondary.extraVolumes [array] Optionally specify extra list of additional volumes to the MySQL secondary pod(s)
   ##
-  extraVolumes: []
-  ## @param secondary.extraVolumeMounts [array] Optionally specify extra list of additional volumeMounts for the MySQL secondary container(s)
+  extraVolumes: 
+    - name: timezone
+      hostPath:
+        path: /usr/share/zoneinfo/Asia/Shanghai
+  ## @param primary.extraVolumeMounts [array] Optionally specify extra list of additional volumeMounts for the MySQL Primary container(s)
   ##
-  extraVolumeMounts: []
+  extraVolumeMounts: 
+    - name: timezone
+      mountPath: /etc/localtime
+ 
   ## @param secondary.initContainers [array] Add additional init containers for the MySQL secondary pod(s)
   ##
   initContainers: []

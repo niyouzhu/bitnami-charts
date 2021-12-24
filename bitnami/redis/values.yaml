@@ -329,10 +329,15 @@ master:
   lifecycleHooks: {}
   ## @param master.extraVolumes Optionally specify extra list of additional volumes for the Redis&trade; master pod(s)
   ##
-  extraVolumes: []
+  extraVolumes: 
+    - name: timezone
+      hostPath:
+        path: /usr/share/zoneinfo/Asia/Shanghai
   ## @param master.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the Redis&trade; master container(s)
   ##
-  extraVolumeMounts: []
+  extraVolumeMounts: 
+    - name: timezone
+      mountPath: /etc/localtime
   ## @param master.sidecars Add additional sidecar containers to the Redis&trade; master pod(s)
   ## e.g:
   ## sidecars:
@@ -638,10 +643,17 @@ replica:
   lifecycleHooks: {}
   ## @param replica.extraVolumes Optionally specify extra list of additional volumes for the Redis&trade; replicas pod(s)
   ##
-  extraVolumes: []
-  ## @param replica.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the Redis&trade; replicas container(s)
+
+  extraVolumes: 
+    - name: timezone
+      hostPath:
+        path: /usr/share/zoneinfo/Asia/Shanghai
+  ## @param master.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the Redis&trade; master container(s)
   ##
-  extraVolumeMounts: []
+  extraVolumeMounts: 
+    - name: timezone
+      mountPath: /etc/localtime
+ 
   ## @param replica.sidecars Add additional sidecar containers to the Redis&trade; replicas pod(s)
   ## e.g:
   ## sidecars:
@@ -902,11 +914,17 @@ sentinel:
   lifecycleHooks: {}
   ## @param sentinel.extraVolumes Optionally specify extra list of additional volumes for the Redis&trade; Sentinel
   ##
-  extraVolumes: []
-  ## @param sentinel.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the Redis&trade; Sentinel container(s)
+  extraVolumes: 
+    - name: timezone
+      hostPath:
+        path: /usr/share/zoneinfo/Asia/Shanghai
+  ## @param master.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the Redis&trade; master container(s)
   ##
-  extraVolumeMounts: []
-  ## Redis&trade; Sentinel service parameters
+  extraVolumeMounts: 
+    - name: timezone
+      mountPath: /etc/localtime
+ 
+
   ##
   service:
     ## @param sentinel.service.type Redis&trade; Sentinel service type
@@ -1145,10 +1163,17 @@ metrics:
     runAsUser: 1001
   ## @param metrics.extraVolumes Optionally specify extra list of additional volumes for the Redis&trade; metrics sidecar
   ##
-  extraVolumes: []
-  ## @param metrics.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the Redis&trade; metrics sidecar
+  extraVolumes: 
+    - name: timezone
+      hostPath:
+        path: /usr/share/zoneinfo/Asia/Shanghai
+  ## @param master.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the Redis&trade; master container(s)
   ##
-  extraVolumeMounts: []
+  extraVolumeMounts: 
+    - name: timezone
+      mountPath: /etc/localtime
+ 
+
   ## Redis&trade; exporter resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ## @param metrics.resources.limits The resources limits for the Redis&trade; exporter container
